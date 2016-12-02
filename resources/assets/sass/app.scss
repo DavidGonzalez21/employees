@@ -7,3 +7,23 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.blur {
+  /* Safari 6.0 - 9.0 */
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+}
+
+.img-logo {
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+.div-form-rg {
+  width: 30% !important;
+  margin: 0 auto !important;
+}
+
+.margin-top-5 {
+  margin-top: 2% !important;
+}
