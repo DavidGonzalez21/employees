@@ -13,3 +13,7 @@
 
 Route::get('/', 'RegisterController@index');
 Route::POST('/new', 'RegisterController@create');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

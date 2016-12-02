@@ -16,7 +16,7 @@ class RegisterController extends Controller
       $this->validate($request, [
           'first_name' => 'bail|required',
           'last_name' => 'bail|required',
-          'middle_name' => 'bail|required',
+          'other_name' => 'bail|required',
           'email' => 'bail|required',
           'password' => 'bail|required',
           'cell_phone' => 'bail|required'
