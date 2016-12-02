@@ -1,12 +1,11 @@
-@extends('layouts.app')
+@include('headers.header')
 
-@section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
+                <div class="panel-heading center image_logo"><img src="https://www.clickittech.com/wp-content/uploads/2015/03/logo_sample8-Converted-e1426278580674.png" alt=""></div>
+                <div class="panel-body form-register">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}
 
@@ -40,7 +39,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
+                                <div class="checkbox">@section('content')
                                     <label>
                                         <input type="checkbox" name="remember"> Remember Me
                                     </label>
@@ -65,4 +64,9 @@
         </div>
     </div>
 </div>
-@endsection
+<script type="text/javascript">
+  options = { to: { width: 200, height: 60 } };
+  $(".image_logo").fadeIn(4000);
+  $(".form-register").toggle( 'drop', options, 500 );
+</script>
+@include('headers.footer')
