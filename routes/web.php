@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', 'RegisterController@index');
+Route::get('/', function() {
+  return view('auth.login');
+});
 Route::POST('/new', 'RegisterController@create');
 
 Auth::routes();
