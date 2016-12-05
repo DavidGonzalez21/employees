@@ -6,7 +6,7 @@
             <div class="panel panel-default">
                 <div class="image_logo panel-heading center"><img src="https://www.clickittech.com/wp-content/uploads/2015/03/logo_sample8-Converted-e1426278580674.png" alt=""></div>
                 <div class="panel-body form-register">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
@@ -96,6 +96,20 @@
                                 @if ($errors->has('cell_phone'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('cell_phone') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('profile_photo') ? ' has-error' : '' }}">
+                            <label for="profile_photo" class="col-md-4 control-label">Profile photo</label>
+
+                            <div class="col-md-6">
+                                <input id="profile_photo" type="file" class="form-control" name="profile_photo" required>
+
+                                @if ($errors->has('profile_photo'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('profile_photo') }}</strong>
                                     </span>
                                 @endif
                             </div>

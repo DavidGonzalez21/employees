@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Input;
 
 class RegisterController extends Controller
 {
@@ -27,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -63,15 +65,43 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+    protected function create(array $request)
     {
-        return User::create([
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'middle_name' => $data['middle_name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'cell_phone' => $data['cell_phone']
-        ]);
+      if(Input::hasFile('profile_photo')){
+        $image = Input::file('profile_photo');
+        $upload = base_path().'/images/';
+        $filename = bcrypt($request['last_name']).'.png';
+        $image->move($upload, $filename);
+        $path = $upload.$filename;
+      }
+      return User::create([
+          'first_name' => $request['first_name'],
+          'last_name' => $request['last_name'],
+          'middle_name' => $request['middle_name'],
+          'email' => $request['email'],
+          'password' => bcrypt($request['password']),
+          'cell_phone' => $request['cell_phone'],
+          'profile_photo' => $path
+      ]);
     }
+
+    // public function add_user(Request $request) {
+    //     if(Input::hasFile('profile_photo')){
+    //       $image = Input::file('profile_photo');
+    //       $upload = base_path().'/images/';
+    //       $filename = bcrypt($request['last_name']).'.png';
+    //       $image->move($upload, $filename);
+    //       $path = $upload.$filename;
+    //     }
+    //     User::create([
+    //         'first_name' => $request['first_name'],
+    //         'last_name' => $request['last_name'],
+    //         'middle_name' => $request['middle_name'],
+    //         'email' => $request['email'],
+    //         'password' => bcrypt($request['password']),
+    //         'cell_phone' => $request['cell_phone'],
+    //         'profile_photo' => $path
+    //     ]);
+    //
+    // }
 }
