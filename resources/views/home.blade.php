@@ -1,4 +1,5 @@
 @include('headers.header')
+<<<<<<< HEAD
 
 <script type="text/javascript">
       // Your Client ID can be retrieved from your project in the Google
@@ -265,4 +266,13 @@
     })
 </script>
 
+=======
+@include('content.head_container')
+
+<div class="">
+    <h1>here</h1>
+</div>
+
+@include('content.footer_container')
+>>>>>>> 5bfd02f4227b4658dda8b339d36c56a95627f4ff
 @include('headers.footer')
