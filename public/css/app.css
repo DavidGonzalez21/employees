@@ -4757,7 +4757,6 @@ tbody.collapse.in {
 .navbar {
   position: relative;
   min-height: 50px;
-  margin-bottom: 22px;
   border: 1px solid transparent;
 }
 
@@ -7833,6 +7832,10 @@ button.close {
     position: relative;
     margin-right: 0;
   }
+}
+
+.span-color {
+  color: black;
 }
 
 /*# sourceMappingURL=app.css.map */

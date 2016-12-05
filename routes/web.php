@@ -11,11 +11,10 @@
 |
 */
 
-Route::get('/', function() {
-  return view('auth.login');
-});
-Route::POST('/new', 'RegisterController@create');
+Route::get('/', 'Auth\LoginController@index');
+Route::post('/add_user', 'Auth\RegisterController@add_user');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::resource('/get_user/{id}', 'Auth\RegisterController@get_user');
