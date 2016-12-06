@@ -1,6 +1,11 @@
 @include('headers.header')
-<<<<<<< HEAD
-
+@include('content.head_container')
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
+<script src="/js/jquery.elastic.js"></script>
+<script src="/js/jquery.events.inputs.js"></script>
+<script type="text/javascript" src="/js/mention.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/mention.css">
 <script type="text/javascript">
       // Your Client ID can be retrieved from your project in the Google
       // Developer Console, https://console.developers.google.com
@@ -88,7 +93,7 @@
               var end = new Date(event.end.dateTime);
               var url = event.htmlLink;
               var when = event.start.dateTime;
-              data.push('{id:' + id + ', title:' + title + ', url:' +url + ', class: "event_important", start:'+start.getTime()+ ', end: '+end.getTime()+'}');
+              data.push('{id:' + id + ', title:' + title + ', url:' +url + ', class: "event_important", start:'+start+ ', end: '+end+'}');
               if (!when) {
                 when = event.start.date;
               }
@@ -120,25 +125,26 @@
       }
       
         
-        function add_event(){
+        function add_event(summary, location, description, start, end, attendees){
             var event = {
-          'summary': 'Google I/O 2015',
-          'location': '800 Howard St., San Francisco, CA 94103',
-          'description': 'A chance to hear more about Google\'s developer products.',
+          'summary': summary,
+          'location': location,
+          'description': description,
           'start': {
-            'dateTime': '2016-12-05T11:05:30-06:00',
+            'dateTime': start,
             'timeZone': 'America/Monterrey'
           },
           'end': {
-            'dateTime': '2016-12-05T11:05:55-06:00',
+            'dateTime': end,
             'timeZone': 'America/Monterrey'
           },
           'recurrence': [
             'RRULE:FREQ=DAILY;COUNT=2'
           ],
           'attendees': [
-            {'email': 'weerogoonzaleez@gmail.com'},
-            {'email': 'vbgargciag@gmail.com'}
+                attendees
+            /*{'email': 'weerogoonzaleez@gmail.com'},
+            {'email': 'vbgargciag@gmail.com'}*/
           ],
           'reminders': {
             'useDefault': false,
@@ -166,42 +172,8 @@
     </script>
     <script src="https://apis.google.com/js/client.js?onload=checkAuth">
     </script>
-    <div id="wrapper">
 
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        Start Bootstrap
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#">Shortcuts</a>
-                </li>
-                <li>
-                    <a href="#">Overview</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+  
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
 
@@ -218,15 +190,12 @@
       </button>
       
     </div>
+    <div class="datepicker"></div>
     <button type="button" class="btn" data-toggle="modal" data-target="#myModal">Add</button>
     <pre id="output"></pre>
             </div>
-        </div>
-    </div>
-    <div class="calendar">
         
-    </div>
-</div>
+    
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -248,31 +217,87 @@
          <div class="form-group">
             <b>description</b> <input type="text" class="form-control" name="description" id="description"><br>
          </div>
-        <b>start</b><input type="text" name="start" id="start"><br>
-        <b>end</b><input type="text" name="end" id="end"><br>
-        <b>attendees</b><input type="text" name="attendees" id="attendees">
+         <div class="form-group">
+            <b>start</b><input type="text" class="form-control" name="start" id="start"><br>
+         </div>
+         <div class="form-group">
+        <b>end</b><input type="text" class="form-control" name="end" id="end"><br>
+         </div>
+        <b>attendees</b><textarea class="mention form-control"></textarea>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn addEvent">Add</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
 
   </div>
 </div>
+
+
+
 <script type="text/javascript">
+   (function ($) {
+    
+            
+    $('textarea.mention').mentionsInput({
+        onDataRequest:function (mode, query, callback) {
+            var data = [];
+            @foreach ($employees as $employee)
+                var id = "{{$employee->user_id}}"
+                var name = "{{$employee->email}}"
+                var avatar = "{{$employee->profile_photo}}"
+                var type = "employee"
+                data.push({"id": id,"name": name, "avatar":avatar, "type": type});
+            @endforeach
+     
+      data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
+
+      callback.call(this, data);
+    }
+    })
+     $('.get-syntax-text').click(function() {
+    $('textarea.mention').mentionsInput('val', function(text) {
+      alert(text);
+    });
+  });
+
+  $('.get-mentions').click(function() {
+    $('textarea.mention').mentionsInput('getMentions', function(data) {
+      alert(JSON.stringify(data));
+    });
+  });
+})(jQuery);
+$(document).ready(function(){
+    $('.datepicker').datepicker({
+        inline: true,
+            numberOfMonths: [1,6],
+            dateFormat: "mm/dd/yyyy",
+            //beforeShowDay: highlightDays
+    });
     $('.addEvent').click(function(){
-        
+        var summary = $('#summary').val();
+        var location = $('#location').val();
+        var description = $('#description').val();
+        var a = $('#start').val();
+        var time = new Date(a);
+        var start = time.toISOString();
+        var a2 = $('#end').val();
+        var time2 = new Date(a2)
+        var end = time2.toISOString();
+        var str = $('.mentions-input-box .mentions').text();
+        var res = str.split(" ");
+        var attendees = [];
+        res.forEach(function(value,key){
+            attendees.push({"email":value});
+        })
+        console.log(attendees);
+        add_event(summary, location, description, start, end, attendees)
         //add_event(data);
     })
+})
+    
 </script>
 
-=======
-@include('content.head_container')
-
-<div class="">
-    <h1>here</h1>
-</div>
-
 @include('content.footer_container')
->>>>>>> 5bfd02f4227b4658dda8b339d36c56a95627f4ff
 @include('headers.footer')

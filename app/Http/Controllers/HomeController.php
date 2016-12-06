@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Employees;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -24,11 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $employees = Employees::all();
+        $employees = User::all();
         $array = array();
-        foreach ($employees as $employee) {
-            //echo $employee->first_name; 
-        }
+       
         $data = array('employees' => $employees );
         return view('home', $data);
     }
