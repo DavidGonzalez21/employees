@@ -6,7 +6,17 @@
 <script src="/js/jquery.events.inputs.js"></script>
 <script type="text/javascript" src="/js/mention.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/mention.css">
+<link rel="stylesheet" type="text/css" href="/css/datepicker-style.css">
+<style type="text/css">
+    td.highlight{
+        background-color: red !important; 
+    }
+    td.highlight a{
+        color: white;
+    }
+</style>
 <script type="text/javascript">
+var dates = [];
       // Your Client ID can be retrieved from your project in the Google
       // Developer Console, https://console.developers.google.com
       var CLIENT_ID = '615292256409-cgnja4nkevjnl20ght17toaom424f00a.apps.googleusercontent.com';
@@ -94,6 +104,7 @@
               var end = new Date(event.end.dateTime);
               var url = event.htmlLink;
               var when = event.start.dateTime;
+              dates.push(start);
               data.push('{id:' + id + ', title:' + title + ', url:' +url + ', class: "event_important", start:'+start+ ', end: '+end+'}');
               if (!when) {
                 when = event.start.date;
@@ -102,6 +113,7 @@
               
             }
             appendPre(data)
+            calendarize(data)
           } else {
             appendPre('No upcoming events found.');
           }
@@ -191,7 +203,7 @@
       </button>
       
     </div>
-    <div class="datepicker"></div>
+
     <button type="button" class="btn" data-toggle="modal" data-target="#myModal">Add</button>
     <pre id="output"></pre>
             </div>
@@ -237,7 +249,7 @@
 
 
 
-
+<div id="datepicker"></div>
 <script type="text/javascript">
    (function ($) {
     
@@ -270,13 +282,35 @@
     });
   });
 })(jQuery);
-$(document).ready(function(){
-    $('.datepicker').datepicker({
-        inline: true,
-            numberOfMonths: [1,6],
+
+function calendarize(data){
+
+        $('#datepicker').datepicker({
+            inline: false,
+            numberOfMonths: [1,12],
             dateFormat: "mm/dd/yyyy",
-            //beforeShowDay: highlightDays
+            beforeShowDay: highlightDays
+
     });
+    }
+     
+
+     function highlightDays(date){
+            
+            for (var i = 0; i < dates.length; i++) {
+                if (new Date(dates[i]).toLocaleDateString() == date.toLocaleDateString()) { 
+                    console.log('entro', new Date(dates[i]).toString())             
+                    return [true, 'highlight'];
+                }
+                else{
+                    //console.log('no entro', new Date(dates[i]).toString()) 
+                }
+            }
+            return [true, ''];
+        }
+
+$(document).ready(function(){
+    
     $('.addEvent').click(function(){
         var summary = $('#summary').val();
         var location = $('#location').val();

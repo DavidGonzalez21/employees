@@ -69,6 +69,7 @@ class ComposerStaticInit0446ee50726e0ea76866a56a57212144
         'L' => 
         array (
             'League\\Flysystem\\' => 17,
+            'Laracasts\\Generators\\' => 21,
         ),
         'I' => 
         array (
@@ -203,6 +204,10 @@ class ComposerStaticInit0446ee50726e0ea76866a56a57212144
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
         ),
+        'Laracasts\\Generators\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laracasts/generators/src',
+        ),
         'Illuminate\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
@@ -286,6 +291,7 @@ class ComposerStaticInit0446ee50726e0ea76866a56a57212144
     public static $classMap = array (
         'CreateClientsTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_01_221907_create_clients_table.php',
         'CreateEmployeesTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_01_221759_create_employees_table.php',
+        'CreateEventTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_06_214319_create_event_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreateTasksTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_01_221949_create_tasks_table.php',
         'CreateUserTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_02_210956_create_user_table.php',
@@ -821,6 +827,7 @@ class ComposerStaticInit0446ee50726e0ea76866a56a57212144
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
+        'UserEventTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_06_230123_user_event_table.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
