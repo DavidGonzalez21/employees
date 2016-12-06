@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url(https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css);
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -7727,115 +7728,97 @@ button.close {
   display: none;
 }
 
-#wrapper {
-  padding-left: 0;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-
-#wrapper.toggled {
-  padding-left: 250px;
-}
-
-#sidebar-wrapper {
+.pushmenu {
+  /*this is the nav*/
+  background: #3c3933;
+  font-family: Arial, Helvetics, sans-serif;
+  width: 240px;
+  height: 100%;
+  top: 0;
   z-index: 1000;
   position: fixed;
-  left: 250px;
-  width: 0;
-  height: 100%;
-  margin-left: -250px;
-  overflow-y: auto;
-  background: #000;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
 }
 
-#wrapper.toggled #sidebar-wrapper {
-  width: 250px;
-}
-
-#page-content-wrapper {
-  width: 100%;
-  position: absolute;
-  padding: 15px;
-}
-
-#wrapper.toggled #page-content-wrapper {
-  position: absolute;
-  margin-right: -250px;
-}
-
-.sidebar-nav {
-  position: absolute;
-  top: 0;
-  width: 250px;
+.pushmenu h3 {
+  color: #cbbfad;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 15px 20px;
   margin: 0;
-  padding: 0;
-  list-style: none;
+  background: #282522;
+  height: 16px;
 }
 
-.sidebar-nav li {
-  text-indent: 20px;
-  line-height: 40px;
-}
-
-.sidebar-nav li a {
+.pushmenu a {
   display: block;
-  text-decoration: none;
-  color: #999999;
-}
-
-.sidebar-nav li a:hover {
-  text-decoration: none;
+  /* drops the nav vertically*/
   color: #fff;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
+  font-size: 16px;
+  font-weight: bold;
   text-decoration: none;
+  border-top: 1px solid #56544e;
+  border-bottom: 1px solid #312e2a;
+  padding: 14px;
 }
 
-.sidebar-nav > .sidebar-brand {
-  height: 65px;
-  font-size: 18px;
-  line-height: 60px;
+.pushmenu a:hover {
+  background: #00A287;
 }
 
-.sidebar-nav > .sidebar-brand a {
-  color: #999999;
-}
-
-.sidebar-nav > .sidebar-brand a:hover {
+.pushmenu a:active {
+  background: #454f5c;
   color: #fff;
-  background: none;
 }
 
-@media (min-width: 768px) {
-  #wrapper {
-    padding-left: 250px;
-  }
-  #wrapper.toggled {
-    padding-left: 0;
-  }
-  #sidebar-wrapper {
-    width: 250px;
-  }
-  #wrapper.toggled #sidebar-wrapper {
-    width: 0;
-  }
-  #page-content-wrapper {
-    padding: 20px;
-    position: relative;
-  }
-  #wrapper.toggled #page-content-wrapper {
-    position: relative;
-    margin-right: 0;
-  }
+.pushmenu-left {
+  left: -240px;
 }
 
-.span-color {
-  color: black;
+.pushmenu-left.pushmenu-open {
+  left: 0;
+}
+
+.pushmenu-push {
+  overflow-x: hidden;
+  position: relative;
+  left: 0;
+}
+
+.pushmenu-push-toright {
+  left: 240px;
+}
+
+/*Transition*/
+.pushmenu, .pushmenu-push {
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+#nav_list {
+  background: url(https://cdn4.iconfinder.com/data/icons/miu/24/circle-next-arrow-disclosure-glyph-48.png) no-repeat left top;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  text-indent: -99999em;
+}
+
+nav-list.active {
+  background-position: -33px top;
+}
+
+.buttonset {
+  background: #00A287;
+  height: 16px;
+  padding: 10px 20px 20px;
+}
+
+section.content {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 10px 20px;
+}
+
+.span-menu {
+  font-size: 20px;
 }
 
 /*# sourceMappingURL=app.css.map */

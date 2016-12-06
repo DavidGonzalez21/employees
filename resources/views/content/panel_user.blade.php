@@ -5,22 +5,60 @@
 <button type="button" id="btn-add-user" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
   Add user
 </button>
+<table class="table table-bordered">
+  @if (session('success'))
+    <thead>
+      <div class="alert alert-success">{{ session('success') }}</div>
+    </thead>
+  @endif
+  <tbody>
+@foreach ($users as $user)
+  <tr id="{{ $user->user_id }}">
+    <td><img src="{{ $user->profile_photo }}" width="50" height="50" alt="" class="img-responsive img-rounded center"></td>
+    <td class="text-capitalize" id="fname"> {{ $user->first_name }} </td>
+    <td class="text-capitalize" id="lname"> {{ $user->last_name }} </td>
+    <td class="text-capitalize" id="mname"> {{ $user->middle_name }} </td>
+    <td id="femail"> {{ $user->email }} </td>
+    <td id="fphone"> {{ $user->cell_phone }} </td>
+    <td> <button type="button" id=" {{ $user->user_id}} " name="delete_user" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button> </td>
+    <td> <button type="button" id=" {{ $user->user_id }}" name="update_user" class="update btn btn-success"> <span class="glyphicon glyphicon-refresh"></span> </button> </td>
+  </tr>
+@endforeach
+  </tbody>
+  </table>
 @extends('content.modal')
 
+@section('modalid')
+myModal
+@stop
+
 @section('modaltittle')
-<h5>Add new user</h5>
+<h5>Add / Update user</h5>
 @stop
 
 @section('modalbody')
 <div class="panel panel-default">
-  <div class="image_logo panel-heading center"><img src="https://www.clickittech.com/wp-content/uploads/2015/03/logo_sample8-Converted-e1426278580674.png" alt=""></div>
+  <div class="panel-heading center"><img src="https://www.clickittech.com/wp-content/uploads/2015/03/logo_sample8-Converted-e1426278580674.png" alt=""></div>
   <div class="panel-body">
     <form id="add_user_form" class="form-horizontal" role="form" method="POST" action="{{ url('/add_user') }}" enctype="multipart/form-data">
       {{ csrf_field() }}
       @if (session('status'))
+      <script>
+      $(function() {
+          $('#myModal').modal('show');
+      });
+      </script>
       <div class="alert alert-success">
         <span>{{ session('status') }}</span>
       </div>
+      @endif
+      @if (session('status_update'))
+      <script>
+      $(function() {
+          $('#update').modal('show');
+          $('#add_user_form').attr('action', '/update_user');
+      });
+      </script>
       @endif
       @if (! $errors->isEmpty())
       <script>
@@ -137,7 +175,7 @@
 
       <div class="form-group">
         <div class="col-md-6 col-md-offset-4">
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" id="action_button" name="action_button" class="btn btn-primary">
             Register
           </button>
         </div>
@@ -176,4 +214,33 @@ $(".form-register").toggle( 'drop', options, 500 );
 //     event.preventDefault();
 //     //return false;
 //   });
+
+//update_user
+$('.update').click(function() {
+  $("#myModal").modal('show');
+  var idtr = $(this).closest('tr').attr('id');
+  $('#add_user_form').attr('action', '/update_user');
+  $("#action_button").val(idtr).text('Update data');
+  $("#first_name").removeAttr('required').val($('#'+idtr+' >#fname').text().trim())
+  $("#last_name").removeAttr('required').val($('#'+idtr+' >#lname').text().trim())
+  $("#middle_name").removeAttr('required').val($('#'+idtr+' >#mname').text().trim())
+  $("#email").removeAttr('required').val($('#'+idtr+' >#femail').text().trim())
+  $("#cell_phone").removeAttr('required').val($('#'+idtr+'>#fphone').text().trim())
+  $("#password").removeAttr('required');
+  $("#password-confirm").removeAttr('required');
+  //alert($('#'+idtr+' > #fname').text());
+})
+
+//add user button
+$("#btn-add-user").click(function() {
+  $("#action_button").val('').text('Save data');
+  $('#add_user_form').attr('action', '/add_user');
+  $("#first_name").val('').attr('required', true);;
+  $("#last_name").attr('required', true).val('');
+  $("#middle_name").attr('required', true).val('');
+  $("#email").attr('required', true).val('');
+  $("#cell_phone").attr('required', true).val('');
+  $("#password").attr('required', true).val('');
+  $("#password-confirm").attr('required', true).val('');
+});
 </script>

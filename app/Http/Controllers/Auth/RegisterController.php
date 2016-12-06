@@ -40,7 +40,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         //$this->middleware('guest');
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 
     /**
@@ -115,10 +115,54 @@ class RegisterController extends Controller
         'profile_photo' => $path
     ]);
     $msg = 'user created';
-    return redirect('/register')->with('status', 'User created!');
+    return redirect('/users')->with('status', 'User created!');
     }
 
     public function get_user($id) {
       return User::find($id) != null ? response()->json(User::find($id)) : response()->json(['status' => 'ERROR', 'message' => 'not found']) ;
+    }
+
+    public function update_user(Request $request) {
+
+      $validator = Validator::make($request->all(), [
+            'first_name' => 'max:255',
+            'last_name' => 'max:255',
+            'middle_name' => 'max:255',
+            'email' => 'email|max:255',
+            'password' => 'min:6|confirmed',
+            'cell_phone' => 'numeric',
+            'profile_photo' => 'mimes:jpeg,bmp,png'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/users')
+                        ->withErrors($validator)
+                        ->withInput()
+                        ->with('status_update','fail_update');
+        }
+
+      if(Input::hasFile('profile_photo')){
+        $current = Carbon::now();
+        $image = Input::file('profile_photo');
+        $upload = base_path().'/public/images/';
+        $filename = $request['last_name'].$current.'.png';
+        $image->move($upload, $filename);
+        $path = 'images/'.$filename;
+      }else
+      {
+        $path = '';
+      }
+      $id = $request['action_button'];
+      $update = User::find($id);
+      $request['first_name'] != '' ? $update->first_name = $request['first_name'] : $update->first_name = $update->first_name;
+      $request['last_name'] != '' ? $update->last_name = $request['last_name'] : $update->last_name = $update->last_name;
+      $request['middle_name'] != '' ? $update->middle_name = $request['middle_name'] : $update->middle_name = $update->middle_name;
+      $request['cell_phone'] != '' ? $update->cell_phone = $request['cell_phone'] : $update->cell_phone = $update->cell_phone;
+      $request['email'] != '' ? $update->email = $request['email'] : $update->email = $update->email;
+      $request['password'] != '' ? $update->password = $request['password'] : $update->password = $update->password;
+      $path != '' ? $update->profile_photo = $path : $update->profile_photo = $update->profile_photo;
+      if($update->save()) {
+        return redirect('/users')->with('success', 'User has been updated successfuly');
+      }
     }
 }
