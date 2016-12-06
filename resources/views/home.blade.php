@@ -11,6 +11,7 @@
       // Developer Console, https://console.developers.google.com
       var CLIENT_ID = '615292256409-cgnja4nkevjnl20ght17toaom424f00a.apps.googleusercontent.com';
 
+
       var SCOPES = ["https://www.googleapis.com/auth/calendar"];
 
       /**
@@ -233,6 +234,7 @@
 
   </div>
 </div>
+
 
 
 

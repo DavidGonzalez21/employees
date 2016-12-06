@@ -17,4 +17,6 @@ Route::post('/add_user', 'Auth\RegisterController@add_user');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-Route::resource('/get_user/{id}', 'Auth\RegisterController@get_user');
+//Route::resource('/get_user/{id}', 'Auth\RegisterController@get_user');
+Route::resource('/users', 'UsersController@index');
+Route::resource('/update_user', 'Auth\RegisterController@update_user');
