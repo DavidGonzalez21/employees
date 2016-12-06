@@ -2,14 +2,14 @@
 
 @include('content.head_container')
 
-<button type="button" id="btn-add-user" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+<button type="button" id="btn-add-user" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="float: right;">
   Add user
 </button>
 <table class="table table-bordered">
   @if (session('success'))
-    <thead>
-      <div class="alert alert-success">{{ session('success') }}</div>
-    </thead>
+    <script>
+      toastr.success("{{ session('success') }}");
+    </script>
   @endif
   <tbody>
 @foreach ($users as $user)
@@ -20,7 +20,9 @@
     <td class="text-capitalize" id="mname"> {{ $user->middle_name }} </td>
     <td id="femail"> {{ $user->email }} </td>
     <td id="fphone"> {{ $user->cell_phone }} </td>
-    <td> <button type="button" id=" {{ $user->user_id}} " name="delete_user" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button> </td>
+    <td> <form class="" action="delete_user/{{ $user->user_id }}" method="get">
+      <button type="submit" id=" {{ $user->user_id}} " name="delete_user" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+    </form></td>
     <td> <button type="button" id=" {{ $user->user_id }}" name="update_user" class="update btn btn-success"> <span class="glyphicon glyphicon-refresh"></span> </button> </td>
   </tr>
 @endforeach
@@ -38,7 +40,7 @@ myModal
 
 @section('modalbody')
 <div class="panel panel-default">
-  <div class="panel-heading center"><img src="https://www.clickittech.com/wp-content/uploads/2015/03/logo_sample8-Converted-e1426278580674.png" alt=""></div>
+  <!-- <div class="panel-heading center"></div> -->
   <div class="panel-body">
     <form id="add_user_form" class="form-horizontal" role="form" method="POST" action="{{ url('/add_user') }}" enctype="multipart/form-data">
       {{ csrf_field() }}
