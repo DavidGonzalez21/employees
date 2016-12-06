@@ -115,11 +115,19 @@ class RegisterController extends Controller
         'profile_photo' => $path
     ]);
     $msg = 'user created';
-    return redirect('/users')->with('status', 'User created!');
+    return redirect('/users')->with('success', 'User created!');
     }
 
     public function get_user($id) {
       return User::find($id) != null ? response()->json(User::find($id)) : response()->json(['status' => 'ERROR', 'message' => 'not found']) ;
+    }
+
+    public function delete_user($id) {
+      $user = User::find($id);
+
+      if($user->delete()) {
+        return redirect('/users')->with('success', 'User has been removed successfuly');
+      }
     }
 
     public function update_user(Request $request) {
