@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'CreateClientsTable' => $baseDir . '/database/migrations/2016_12_01_221907_create_clients_table.php',
     'CreateEmployeesTable' => $baseDir . '/database/migrations/2016_12_01_221759_create_employees_table.php',
+    'CreateEventTable' => $baseDir . '/database/migrations/2016_12_06_214319_create_event_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateTasksTable' => $baseDir . '/database/migrations/2016_12_01_221949_create_tasks_table.php',
     'CreateUserTable' => $baseDir . '/database/migrations/2016_12_02_210956_create_user_table.php',
@@ -543,4 +544,5 @@ return array(
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
+    'UserEventTable' => $baseDir . '/database/migrations/2016_12_06_230123_user_event_table.php',
 );
