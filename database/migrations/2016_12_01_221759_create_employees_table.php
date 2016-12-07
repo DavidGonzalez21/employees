@@ -15,14 +15,15 @@ class CreateEmployeesTable extends Migration
     {
       Schema::create('Employees', function (Blueprint $table) {
           $table->increments('employee_id');
-          $table->string('first_name', 15);
-          $table->string('last_name', 15);
-          $table->string('other_name', 15);
+          $table->string('first_name', 30);
+          $table->string('last_name', 30);
+          $table->string('other_name', 30);
           $table->string('email', 50);
           $table->string('phone', 15);
           $table->string('user_skype', 20);
-          $table->date('date_of_brth');
+          $table->date('date_of_birth');
           $table->date('hire_date');
+          $table->string('profile_photo', 255)->nullable();
           $table->timestamps();
       });
     }
