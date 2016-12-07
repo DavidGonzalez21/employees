@@ -14,7 +14,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $data = array('users' =>  User::all());
+        $data = array('users' =>  User::all()->sortBy('first_name'));
         return view('content.panel_user', $data);
     }
 

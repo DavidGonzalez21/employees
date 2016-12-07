@@ -260,5 +260,16 @@ nav-list.active {
  }
 
 .span-menu {
-  font-size: 20px;
+  font-size: 40px;
+  position: fixed;
+  margin-top: 50px;
+  z-index: 1;
+}
+
+.div-panel {
+  width: 70%;
+}
+
+.pp_employee {
+  min-width: 180px !important;
 }

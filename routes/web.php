@@ -21,3 +21,6 @@ Route::get('/home', 'HomeController@index');
 Route::resource('/users', 'UsersController@index');
 Route::resource('/update_user', 'Auth\RegisterController@update_user');
 Route::resource('delete_user', 'Auth\RegisterController@delete_user');
+Route::resource('/employees', 'EmployeesController@index');
+Route::resource('/add_employee', 'EmployeesController@create');
+Route::resource('/update_employee', 'EmployeesController@update');

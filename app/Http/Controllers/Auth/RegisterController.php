@@ -114,7 +114,7 @@ class RegisterController extends Controller
         'cell_phone' => $request['cell_phone'],
         'profile_photo' => $path
     ]);
-    $msg = 'user created';
+
     return redirect('/users')->with('success', 'User created!');
     }
 
