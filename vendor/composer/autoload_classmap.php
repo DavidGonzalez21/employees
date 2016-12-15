@@ -545,4 +545,5 @@ return array(
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UserEventTable' => $baseDir . '/database/migrations/2016_12_06_230123_user_event_table.php',
+    'UserSeeder' => $baseDir . '/database/seeds/UserSeeder.php',
 );
