@@ -4,34 +4,34 @@
   <button type="button" id="btn-add-employee" class="btn btn-primary" data-toggle="modal" data-target="#employeeModal" style="float: right;">
     Add employee
   </button>
-  <table class="table table-bordered">
-    @if (session('success'))
-    <script>
-    toastr.success("{{ session('success') }}");
-    </script>
-    @endif
+  @if (session('success'))
+  <script>
+  toastr.success("{{ session('success') }}");
+  </script>
+  @endif
+  <table class="table table-bordered" id="table_employees">
+    <thead>
+      <tr>
+        <td><span class="glyphicon glyphicon-user">User</span></td>
+        <td><span class="glyphicon glyphicon-envelope">Email</span></td>
+        <td><span class="glyphicon glyphicon-earphone">Cell</span></td>
+        <td><span class="glyphicon glyphicon-user"> Skype</span></td>
+        <td><span class="glyphicon glyphicon-calendar">Birth day</span></td>
+        <td><span class="glyphicon glyphicon-calendar">Hire date</span></td>
+        <td><span class=""></span></td>
+        <td><span class=""></span></td>
+      </tr>
+    </thead>
     <tbody>
-      <thead>
-        <tr>
-          <td><span class="glyphicon glyphicon-user"></span></td>
-          <td><span class="glyphicon glyphicon-envelope"></span></td>
-          <td><span class="glyphicon glyphicon-earphone"></span></td>
-          <td><span class="glyphicon glyphicon-earphone"> Skype</span></td>
-          <td><span class="glyphicon glyphicon-calendar"></span></td>
-          <td><span class="glyphicon glyphicon-calendar"></span></td>
-          <td><span class=""></span></td>
-          <td><span class=""></span></td>
-        </tr>
-      </thead>
       @foreach ($employees as $employee)
       <tr id="{{ $employee->employee_id }}">
-        <td class="pp_employee" width="180px !important"><span id="firstname" class="text-capitalize label label-primary">{{ $employee->first_name }}</span><img src="{{ $employee->profile_photo }}" width="50" height="50" alt="" class="img-responsive img-rounded center"><span id="names" class="text-capitalize label label-primary"> {{ $employee->last_name . ' ' . $employee->other_name }} </span></td>
+        <td class="pp_employee" width="100px !important"><span id="firstname" class="text-capitalize label label-primary center">{{ $employee->first_name }}</span><img src="{{ $employee->profile_photo }}" width="50" height="50" alt="" class="img-responsive img-rounded center"><span id="names" class="text-capitalize label label-primary"> {{ $employee->last_name . ' ' . $employee->other_name }} </span></td>
         <td id="femail"> {{ $employee->email }} </td>
         <td id="fphone"> {{ $employee->phone }} </td>
         <td class="text-capitalize" id="uskype"> {{ $employee->user_skype }} </td>
         <td id="dob"> {{ $employee->date_of_birth }} </td>
         <td id="hdate"> {{ $employee->hire_date }} </td>
-        <td> <form class="" action="delete_user/{{ $employee->employee_id }}" method="get">
+        <td> <form class="" action="delete_employee/{{ $employee->employee_id }}" method="get">
           <button type="submit" id=" {{ $employee->employee_id}} " name="delete_user" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
         </form></td>
         <td> <button type="button" id=" {{ $employee->employee_id }}" name="update_user" class="update btn btn-success"> <span class="glyphicon glyphicon-refresh"></span> </button> </td>
@@ -55,15 +55,12 @@
     <div class="panel-body">
       <form id="add_employee_form" class="form-horizontal" role="form" method="POST" action="{{ url('/add_employee') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
-        @if (session('status'))
+        @if (session('status_create'))
         <script>
         $(function() {
           $('#employeeModal').modal('show');
         });
         </script>
-        <div class="alert alert-success">
-          <span>{{ session('status') }}</span>
-        </div>
         @endif
         @if (session('status_update'))
         <script>
@@ -168,7 +165,7 @@
           <label for="birth_date" class="col-md-4 control-label">Birth date</label>
 
           <div class="col-md-6">
-            <input id="birth_date" type="text" class="form-control" name="birth_date" value="{{ old('birth_date') }}" required>
+            <input id="birth_date" type="text" class="form-control datepicker" name="birth_date" value="{{ old('birth_date') }}" required>
 
             @if ($errors->has('birth_date'))
             <span class="help-block">
@@ -181,7 +178,7 @@
         <div class="form-group{{ $errors->has('hire_date') ? ' has-error' : '' }}">
           <label for="hire_date" class="col-md-4 control-label">Hire date</label>
 
-          <div class="col-md-6">
+          <div class="col-md-6" class="datepicker">
             <input id="hire_date" type="text" class="form-control datepicker" name="hire_date" value="{{ old('hire_date') }}" required>
 
             @if ($errors->has('hire_date'))
@@ -190,13 +187,6 @@
             </span>
             @endif
           </div>
-        </div>
-
-        <div class="input-group date" data-provide="datepicker">
-            <input type="text" class="form-control">
-            <div class="input-group-addon">
-                <span class="glyphicon glyphicon-th"></span>
-            </div>
         </div>
 
         <div class="form-group{{ $errors->has('profile_photo') ? ' has-error' : '' }}">
@@ -227,82 +217,3 @@
 @include('content.footer_container')
 
 @include('headers.footer')
-<script type="text/javascript">
-$('.datepicker').datepicker();
-options = { to: { width: 200, height: 60 } };
-$(".image_logo").fadeIn(4000);
-$(".form-register").toggle( 'drop', options, 500 );
-// $('#add_user_form').submit(function(event) {
-//     $(this).ajaxSubmit({
-//       error: function(xhr) {
-//         console.log('Error: ' + xhr.status);
-//       },
-//       success: function(response) {
-//         if(response.status === 'OK')
-//         {
-//           alert(response.message);
-//           $('#add_user_form')[0].reset();
-//         }
-//         else
-//         {
-//           alert(response.responseJSON);
-//         }
-//       }
-//     });
-//     return false;
-//     //Very important line, it disable the page refresh.
-//     event.preventDefault();
-//     //return false;
-//   });
-
-//update_user
-$('.update').click(function() {
-  $("#employeeModal").modal('show');
-
-  var idtr = $(this).closest('tr').attr('id');
-  var names = $("#"+idtr+" #names").text().split(' ');
-  $('#add_employee_form').attr('action', '/update_employee');
-  $("#action_button").val(idtr).text('Update data');
-
-  $("#first_name").removeAttr('required').val($('#'+idtr+' #firstname').text().trim())
-  $("#last_name").removeAttr('required').val(names[1].trim())
-  $("#other_name").removeAttr('required').val(names[2].trim())
-  $("#email").removeAttr('required').val($('#'+idtr+' >#femail').text().trim())
-  $("#cell_phone").removeAttr('required').val($('#'+idtr+'>#fphone').text().trim())
-  $("#user_skype").removeAttr('required').val($('#'+idtr+'>#uskype').text().trim());
-  $("#birth_date").removeAttr('required').val($('#'+idtr+'>#dob').text().trim());
-  $("#hire_date").removeAttr('required').val($('#'+idtr+'>#hdate').text().trim());
-  //alert($('#'+idtr+' > #fname').text());
-})
-
-//add user button
-$("#btn-add-employee").click(function() {
-  $("#action_button").val('').text('Save data');
-  $('#add_employee_form').attr('action', '/add_employee');
-  $("#first_name").focus().val('').attr('required', true);
-  $("#last_name").attr('required', true).val('');
-  $("#other_name").attr('required', true).val('');
-  $("#email").attr('required', true).val('');
-  $("#cell_phone").attr('required', true).val('');
-  $("#user_skype").attr('required', true).val('');
-  $("#birth_date").attr('required', true).val('');
-  $("#hire_date").attr('required', true).val('');
-});
-
-// $(".pp_employee").mouseenter(function() {
-//   var tdid = $(this).closest('tr').attr('id');
-//   $('#'+tdid).find('td').each (function(index, value) {
-//     $(this).show('slow');
-//   });
-// });
-// $(".pp_employee").mouseleave(function() {
-//   var tdid = $(this).closest('tr').attr('id');
-//   $("#"+tdid+' #femail').hide('slow');
-//   $("#"+tdid+' #fphone').hide('slow');
-//   $("#"+tdid+' #uskype').hide('slow');
-//   $("#"+tdid+' #dob').hide('slow');
-//   $("#"+tdid+' #hdate').hide('slow');
-// });
-
-//datepicker
-</script>

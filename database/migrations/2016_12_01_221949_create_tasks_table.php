@@ -18,8 +18,10 @@ class CreateTasksTable extends Migration
           $table->string('task_name');
           $table->date('start_work');
           $table->date('end_work');
-          $table->integer('employee_id');
-          $table->integer('client_id');
+          $table->integer('employee_id')->unsigned();
+          $table->integer('client_id')->unsigned();
+          $table->foreign('employee_id')->references('employee_id')->on('Employees')->onUpdate('cascade');
+          $table->foreign('client_id')->references('client_id')->on('Clients')->onUpdate('cascade');
           $table->timestamps();
       });
     }

@@ -16,7 +16,7 @@
         <td><img src="{{ $user->profile_photo }}" width="50" height="50" alt="" class="img-responsive img-rounded center"></td>
         <td class="text-capitalize" id="fname"> {{ $user->first_name }} </td>
         <td class="text-capitalize" id="lname"> {{ $user->last_name }} </td>
-        <td class="text-capitalize" id="mname"> {{ $user->middle_name }} </td>
+        <td class="text-capitalize" id="mname"> {{ $user->other_name }} </td>
         <td id="femail"> {{ $user->email }} </td>
         <td id="fphone"> {{ $user->cell_phone }} </td>
         <td> <form class="" action="delete_user/{{ $user->user_id }}" method="get">
@@ -96,15 +96,15 @@
           </div>
         </div>
 
-        <div class="form-group{{ $errors->has('middle_name') ? ' has-error' : '' }}">
-          <label for="middle_name" class="col-md-4 control-label">Other Name</label>
+        <div class="form-group{{ $errors->has('other_name') ? ' has-error' : '' }}">
+          <label for="other_name" class="col-md-4 control-label">Other Name</label>
 
           <div class="col-md-6">
-            <input id="middle_name" type="text" class="form-control" name="middle_name" value="{{ old('middle_name') }}" required autofocus>
+            <input id="other_name" type="text" class="form-control" name="other_name" value="{{ old('other_name') }}" required autofocus>
 
-            @if ($errors->has('middle_name'))
+            @if ($errors->has('other_name'))
             <span class="help-block">
-              <strong>{{ $errors->first('middle_name') }}</strong>
+              <strong>{{ $errors->first('other_name') }}</strong>
             </span>
             @endif
           </div>
@@ -223,7 +223,7 @@ $('.update').click(function() {
   $("#action_button").val(idtr).text('Update data');
   $("#first_name").removeAttr('required').val($('#'+idtr+' >#fname').text().trim())
   $("#last_name").removeAttr('required').val($('#'+idtr+' >#lname').text().trim())
-  $("#middle_name").removeAttr('required').val($('#'+idtr+' >#mname').text().trim())
+  $("#other_name").removeAttr('required').val($('#'+idtr+' >#mname').text().trim())
   $("#email").removeAttr('required').val($('#'+idtr+' >#femail').text().trim())
   $("#cell_phone").removeAttr('required').val($('#'+idtr+'>#fphone').text().trim())
   $("#password").removeAttr('required');
@@ -237,7 +237,7 @@ $("#btn-add-user").click(function() {
   $('#add_user_form').attr('action', '/add_user');
   $("#first_name").focus().val('').attr('required', true);
   $("#last_name").attr('required', true).val('');
-  $("#middle_name").attr('required', true).val('');
+  $("#other_name").attr('required', true).val('');
   $("#email").attr('required', true).val('');
   $("#cell_phone").attr('required', true).val('');
   $("#password").attr('required', true).val('');

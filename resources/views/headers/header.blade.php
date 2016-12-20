@@ -2,17 +2,25 @@
 <html>
 <head>
   <title>Laravel</title>
-  <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/datetimepicker.css">
+  <link rel="stylesheet" type="text/css" href="/css/datepicker-style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="/js/app.js"></script>
+  <script src="/js/moment.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="/js/datetimepicker.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
 </head>
 <body>
-  <nav class="navbar navbar-default navbar-static-top">
+  <nav class="navbar navbar-default nvmenu navbar-static-top">
       <div class="container">
           <div class="navbar-header">
 
@@ -26,7 +34,7 @@
 
               <!-- Branding Image -->
               <a class="navbar-brand" href="{{ url('/') }}">
-                  Clickit Tech
+                Clickit tech
               </a>
           </div>
 

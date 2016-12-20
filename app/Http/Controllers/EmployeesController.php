@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
-use App\Employees;
+use App\Employee;
+use App\Holidays;
 
 class EmployeesController extends Controller
 {
@@ -17,7 +18,7 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        $data = array('employees' =>  Employees::all()->sortBy('first_name'));
+        $data = array('employees' =>  Employee::all()->sortBy('first_name'));
         return view('content.panel_employees', $data);
     }
 
@@ -28,17 +29,24 @@ class EmployeesController extends Controller
      */
     public function create(Request $request)
     {
-      $this->validate($request, [
+      $validator = Validator::make($request->all(), [
           'first_name' => 'required|max:255',
           'last_name' => 'required|max:255',
           'other_name' => 'required|max:255',
-          'email' => 'required|email|max:255|unique:Employees',
+          'email' => 'required|email|max:255',
           'cell_phone' => 'required|numeric',
           'user_skype' => 'required|max:255',
           'birth_date' => 'required|date|date_format:Y-m-d',
           'hire_date' => 'required|date|date_format:Y-m-d',
           'profile_photo' => 'mimes:jpeg,bmp,png'
       ]);
+
+      if ($validator->fails()) {
+          return redirect('/employees')
+                      ->withErrors($validator)
+                      ->withInput()
+                      ->with('status_create','fail_create');
+      }
 
       if(Input::hasFile('profile_photo')){
         $current = Carbon::now();
@@ -52,7 +60,7 @@ class EmployeesController extends Controller
         $path = 'images/employees/default.png';
       }
 
-      Employees::create([
+      Employee::create([
         'first_name' => $request['first_name'],
         'last_name' => $request['last_name'],
         'other_name' => $request['other_name'],
@@ -140,7 +148,7 @@ class EmployeesController extends Controller
         $path = '';
       }
       $id = $request['action_button'];
-      $update = Employees::find($id);
+      $update = Employee::find($id);
       $request['first_name'] != '' ? $update->first_name = $request['first_name'] : $update->first_name = $update->first_name;
       $request['last_name'] != '' ? $update->last_name = $request['last_name'] : $update->last_name = $update->last_name;
       $request['other_name'] != '' ? $update->other_name = $request['other_name'] : $update->other_name = $update->other_name;
@@ -163,6 +171,24 @@ class EmployeesController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $user = Employee::find($id);
+
+      if($user->delete()) {
+        return redirect('/employees')->with('success', 'Employee has been removed successfuly');
+      }
+    }
+
+    /**
+     * loads the profile of employee.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function profile($id)
+    {
+      $user = Employee::find($id);
+      $holidays = Holidays::all();
+        return view('content.profile_employee', array('employee' => $user, 'holidays' => $holidays));
+
     }
 }

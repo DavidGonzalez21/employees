@@ -76,7 +76,7 @@ class RegisterController extends Controller
       // return User::create([
       //     'first_name' => $request['first_name'],
       //     'last_name' => $request['last_name'],
-      //     'middle_name' => $request['middle_name'],
+      //     'other_name' => $request['other_name'],
       //     'email' => $request['email'],
       //     'password' => bcrypt($request['password']),
       //     'cell_phone' => $request['cell_phone'],
@@ -88,7 +88,7 @@ class RegisterController extends Controller
       $this->validate($request, [
           'first_name' => 'required|max:255',
           'last_name' => 'required|max:255',
-          'middle_name' => 'required|max:255',
+          'other_name' => 'required|max:255',
           'email' => 'required|email|max:255|unique:Users',
           'password' => 'required|min:6|confirmed',
           'cell_phone' => 'required|numeric',
@@ -108,7 +108,7 @@ class RegisterController extends Controller
     User::create([
         'first_name' => $request['first_name'],
         'last_name' => $request['last_name'],
-        'middle_name' => $request['middle_name'],
+        'other_name' => $request['other_name'],
         'email' => $request['email'],
         'password' => bcrypt($request['password']),
         'cell_phone' => $request['cell_phone'],
@@ -135,7 +135,7 @@ class RegisterController extends Controller
       $validator = Validator::make($request->all(), [
             'first_name' => 'max:255',
             'last_name' => 'max:255',
-            'middle_name' => 'max:255',
+            'other_name' => 'max:255',
             'email' => 'email|max:255',
             'password' => 'min:6|confirmed',
             'cell_phone' => 'numeric',
@@ -164,7 +164,7 @@ class RegisterController extends Controller
       $update = User::find($id);
       $request['first_name'] != '' ? $update->first_name = $request['first_name'] : $update->first_name = $update->first_name;
       $request['last_name'] != '' ? $update->last_name = $request['last_name'] : $update->last_name = $update->last_name;
-      $request['middle_name'] != '' ? $update->middle_name = $request['middle_name'] : $update->middle_name = $update->middle_name;
+      $request['other_name'] != '' ? $update->other_name = $request['other_name'] : $update->other_name = $update->other_name;
       $request['cell_phone'] != '' ? $update->cell_phone = $request['cell_phone'] : $update->cell_phone = $update->cell_phone;
       $request['email'] != '' ? $update->email = $request['email'] : $update->email = $update->email;
       $request['password'] != '' ? $update->password = $request['password'] : $update->password = $update->password;
