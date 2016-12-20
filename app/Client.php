@@ -10,11 +10,10 @@ class Client extends Model
 
     protected $primaryKey = 'client_id';
 
-    protected $fillable = ['first_name', 'last_name', 'email', 'phone', 'useer_skype', 'from'];
+    protected $fillable = ['first_name', 'last_name', 'email', 'country'];
 
-    public function employees()
+    public function tasks()
     {
-    	return $this->belongsToMany('App\Employee', 'Tasks', 'client_id', 'employee_id')
-    	->withPivot('task_name', 'start_work', 'end_work');
+    	return $this->hasMany('App\Task', 'client_id');
     }
 }

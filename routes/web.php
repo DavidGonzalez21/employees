@@ -24,3 +24,5 @@ Route::resource('delete_user', 'Auth\RegisterController@delete_user');
 Route::resource('/employees', 'EmployeesController@index');
 Route::resource('/add_employee', 'EmployeesController@create');
 Route::resource('/update_employee', 'EmployeesController@update');
+Route::get('tasks', 'TaskController@index');
+Route::get('task/details/{id}', 'TaskController@details');

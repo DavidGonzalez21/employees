@@ -13,11 +13,15 @@ class Employee extends Model
 
     //protected $hidden = [''];
 
-    protected $fillable = ['first_name', 'last_name', 'other_name', 'email', 'phone', 'user_skype', 'date_of_brth', 'hire_date'];
+    protected $fillable = ['first_name', 'last_name', 'other_name', 'email', 'phone', 'user_skype', 'date_of_birth', 'hire_date'];
 
-    public function clients()
+    public function getFullNameAttribute()
+   	{
+     return $this->first_name.' '.$this->last_name;
+   	}
+
+    public function tasks()
     {
-      return $this->belongsToMany('App\Client', 'Tasks', 'employee_id', 'client_id')
-      ->withPivot('task_name', 'start_work', 'end_work');
+      return $this->belongsToMany('App\Task', 'employee_task');
     }
 }

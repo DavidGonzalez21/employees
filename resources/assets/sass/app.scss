@@ -38,7 +38,7 @@
 }
 
 .center {
-  text-align: center;
+  text-align: center !important;
   margin: 0 auto;
 }
 .image_logo {
@@ -170,99 +170,99 @@
 //   }
 
   //new menu
-  .pushmenu { /*this is the nav*/
-  background: #3c3933;
-  font-family: Arial, Helvetics, sans-serif;
-  width: 240px;
-  height: 100%;
-  top: 0;
-  z-index: 1000;
-  position:fixed;
-}
-
-.pushmenu h3 {
-  color: #cbbfad;
-  font-size: 14px;
-  font-weight: bold;
-  padding: 15px 20px;
-  margin: 0;
-  background: #282522;
-  height: 16px;
-}
-
-.pushmenu a {
-  display: block; /* drops the nav vertically*/
-  color: #fff;
-  font-size: 16px;
-  font-weight: bold;
-  text-decoration: none;
-  border-top: 1px solid #56544e;
-  border-bottom: 1px solid #312e2a;
-  padding: 14px;
-}
-
-.pushmenu a:hover {
-  background:#00A287;
-}
-
-.pushmenu a:active {
-  background: #454f5c;
-  color: #fff;
-}
-
-.pushmenu-left {
-  left: -240px;
-
-}
-
-.pushmenu-left.pushmenu-open {
-  left: 0;
-}
-
-.pushmenu-push {
-  overflow-x: hidden;
-  position: relative;
-  left: 0;
-}
-
-.pushmenu-push-toright {
-  left: 240px;
-}
-
-/*Transition*/
-.pushmenu, .pushmenu-push {
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-
-#nav_list {
-  background: url(https://cdn4.iconfinder.com/data/icons/miu/24/circle-next-arrow-disclosure-glyph-48.png) no-repeat left top;
-  cursor: pointer;
-  height: 50px;
-  width: 50px;
-  text-indent: -99999em;
-}
-
-nav-list.active {
-  background-position: -33px top;
-}
-
- .buttonset {
-      background: #00A287;
-      height: 16px;
-      padding: 10px 20px 20px;
- }
-
- section.content {
-   font-family: Arial, Helvetica, sans-serif;
-   padding: 10px 20px;
- }
+//   .pushmenu { /*this is the nav*/
+//   background: #0176E5;
+//   font-family: Arial, Helvetics, sans-serif;
+//   width: 240px;
+//   height: 100%;
+//   top: 0;
+//   z-index: 1000;
+//   position:fixed;
+// }
+//
+// .pushmenu h3 {
+//   color: #cbbfad;
+//   font-size: 14px;
+//   font-weight: bold;
+//   padding: 15px 20px;
+//   margin: 0;
+//   background: #282522;
+//   height: 16px;
+// }
+//
+// .pushmenu a {
+//   display: block; /* drops the nav vertically*/
+//   color: #fff;
+//   font-size: 16px;
+//   font-weight: bold;
+//   text-decoration: none;
+//   border-top: 1px solid #56544e;
+//   border-bottom: 1px solid #312e2a;
+//   padding: 14px;
+// }
+//
+// .pushmenu a:hover {
+//   background:#00A287;
+// }
+//
+// .pushmenu a:active {
+//   background: #454f5c;
+//   color: #fff;
+// }
+//
+// .pushmenu-left {
+//   left: -240px;
+//
+// }
+//
+// .pushmenu-left.pushmenu-open {
+//   left: 0;
+// }
+//
+// .pushmenu-push {
+//   overflow-x: hidden;
+//   position: relative;
+//   left: 0;
+// }
+//
+// .pushmenu-push-toright {
+//   left: 240px;
+// }
+//
+// /*Transition*/
+// .pushmenu, .pushmenu-push {
+//   -webkit-transition: all 0.3s ease;
+//   -moz-transition: all 0.3s ease;
+//   transition: all 0.3s ease;
+// }
+//
+// #nav_list {
+//   background: url(https://cdn4.iconfinder.com/data/icons/miu/24/circle-next-arrow-disclosure-glyph-48.png) no-repeat left top;
+//   cursor: pointer;
+//   height: 50px;
+//   width: 50px;
+//   text-indent: -99999em;
+// }
+//
+// nav-list.active {
+//   background-position: -33px top;
+// }
+//
+//  .buttonset {
+//       background: #00A287;
+//       height: 16px;
+//       padding: 10px 20px 20px;
+//  }
+//
+//  section.content {
+//    font-family: Arial, Helvetica, sans-serif;
+//    padding: 10px 20px;
+//  }
 
 .span-menu {
   font-size: 40px;
   position: fixed;
-  margin-top: 50px;
+  margin-top: 100px;
   z-index: 1;
 }
 
@@ -273,3 +273,73 @@ nav-list.active {
 .pp_employee {
   min-width: 180px !important;
 }
+
+#table_employees tr td {
+  text-align: center !important;
+  margin: 0 auto;
+}
+
+.holidays {
+  width: 100%;
+}
+
+.justify {
+  width: 70%;
+}
+
+/*new    --------*/
+.navbar {
+  margin-bottom: 0px !important;
+}
+nav.sidebar{
+  -webkit-transition: margin 200ms ease-out;
+    -moz-transition: margin 200ms ease-out;
+    -o-transition: margin 200ms ease-out;
+    transition: margin 200ms ease-out;
+  border:0;
+}
+@media (min-width: 765px)
+{
+  nav.sidebar:hover{margin-left: 200px;}
+  nav.sidebar.navbar.sidebar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {margin-left: 0px;}
+  nav.sidebar .navbar-brand, nav.sidebar .navbar-header{ text-align: center; width: 100%; margin-left: 0px;}
+
+  nav.sidebar .navbar-nav > li:first-child{border-top: 1px red solid;}
+  nav.sidebar .navbar-nav > li{border-bottom: 1px #4B4B4B solid;}
+  nav.sidebar .navbar-nav .open .dropdown-menu { position: static; float: none; width: auto; margin-top: 0; background-color: transparent; border: 0; -webkit-box-shadow: none; box-shadow: none;}
+  nav.sidebar .navbar-collapse, nav.sidebar .container-fluid{padding: 0 0px 0 0px;}
+  .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {color: white;}
+  nav.sidebar{ width: 200px; height: 100%; margin-left: -152px; float:left; margin-bottom: 0px; position: fixed; background-color:#333645;}
+  nav.sidebar li {width: 100%;}
+  nav.sidebar span.color-name{color:#c5c3c3;}
+  nav.sidebar li:hover a span{color:white;}
+
+  nav.sidebar ul{padding:0;}
+  nav.sidebar:hover{margin-left: 0px;}
+  .forAnimate{opacity: 0;}
+  nav.navbar-default .navbar-nav h3{text-align:center;}
+
+  nav.navbar-default .navbar-nav h3 small{color: white;}
+  nav.navbar-default .navbar-nav>li>a{color:#929090; padding:15px 19px;}
+
+  nav.navbar-default li#idCandidates.open, nav.navbar-default li#idOptions.open {border-left:3px solid gray;}
+  nav.navbar-default .navbar-nav>li>a:hover{color:#d8d8d8;}
+  nav.navbar-default .navbar-nav>li>a:focus{color:white;}
+  nav.navbar-default .navbar-nav>li> ul li a.subdropdown{color:#e6e6e6; }
+  nav.navbar-default .navbar-nav>li> ul li a:active{color:white; }
+  nav.navbar-default .navbar-nav>li:hover{background-color:#202334;}
+  nav.navbar-default .navbar-nav>.open>a:focus{background-color:#202334; color:white;}
+  nav.navbar-default .nav .open > a, .nav .open > a:hover, .nav .open > a:focus{background-color:#202334;}
+  nav.navbar-default .navbar-nav>.open>a ul:hover{background-color:#202334; color:white;}
+  div .navbar-collapse ul.dropdown-menu li{color:white;}
+  span.fa-chevron-down, span.fa-chevron-up{float:right;}
+  nav.sidebar ul.navbar-nav h3{margin:0; padding: 8% 0; background-color:#262833;}
+  .active-menu{background-color:#202334;}
+}
+
+@media (min-width: 1330px) {
+  nav.sidebar{ float:left;}
+  nav.sidebar .forAnimate{opacity: 1;}
+}
+nav.sidebar .navbar-nav .open .dropdown-menu>li>a:hover, nav.sidebar .navbar-nav .open .dropdown-menu>li>a:focus { color: #CCC; background-color: transparent;}
+nav:hover .forAnimate{opacity: 1;}

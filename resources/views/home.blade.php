@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="/css/datepicker-style.css">
 <style type="text/css">
     td.highlight{
-        background-color: red !important; 
+        background-color: red !important;
     }
     td.highlight a{
         color: white;
@@ -91,7 +91,7 @@ var dates = [];
 
         request.execute(function(resp) {
           var events = resp.items;
-          
+
           appendPre('Upcoming events:');
           var data = [];
           if (events.length > 0) {
@@ -109,8 +109,8 @@ var dates = [];
               if (!when) {
                 when = event.start.date;
               }
-              
-              
+
+
             }
             appendPre(data)
             calendarize(data)
@@ -129,15 +129,15 @@ var dates = [];
        */
       function appendPre(message) {
         var pre = document.getElementById('output');
-        
+
         var textContent = document.createTextNode(message + '\n');
         pre.appendChild(textContent);
 
 
 
       }
-      
-        
+
+
         function add_event(summary, location, description, start, end, attendees){
             var event = {
           'summary': summary,
@@ -178,15 +178,15 @@ var dates = [];
           appendPre('Event created: ' + event.htmlLink);
         });
         }
-        
-         
-        
-                
+
+
+
+
     </script>
     <script src="https://apis.google.com/js/client.js?onload=checkAuth">
     </script>
 
-  
+
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
 
@@ -201,14 +201,14 @@ var dates = [];
       <button id="authorize-button" onclick="handleAuthClick(event)">
         Authorize
       </button>
-      
+
     </div>
 
     <button type="button" class="btn" data-toggle="modal" data-target="#myModal">Add</button>
     <pre id="output"></pre>
             </div>
-        
-    
+
+
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -250,10 +250,11 @@ var dates = [];
 
 
 <div id="datepicker"></div>
+
 <script type="text/javascript">
    (function ($) {
-    
-            
+
+
     $('textarea.mention').mentionsInput({
         onDataRequest:function (mode, query, callback) {
             var data = [];
@@ -264,7 +265,7 @@ var dates = [];
                 var type = "employee"
                 data.push({"id": id,"name": name, "avatar":avatar, "type": type});
             @endforeach
-     
+
       data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
 
       callback.call(this, data);
@@ -293,24 +294,24 @@ function calendarize(data){
 
     });
     }
-     
+
 
      function highlightDays(date){
-            
+
             for (var i = 0; i < dates.length; i++) {
-                if (new Date(dates[i]).toLocaleDateString() == date.toLocaleDateString()) { 
-                    console.log('entro', new Date(dates[i]).toString())             
+                if (new Date(dates[i]).toLocaleDateString() == date.toLocaleDateString()) {
+                    console.log('entro', new Date(dates[i]).toString())
                     return [true, 'highlight'];
                 }
                 else{
-                    //console.log('no entro', new Date(dates[i]).toString()) 
+                    //console.log('no entro', new Date(dates[i]).toString())
                 }
             }
             return [true, ''];
         }
 
 $(document).ready(function(){
-    
+
     $('.addEvent').click(function(){
         var summary = $('#summary').val();
         var location = $('#location').val();
@@ -332,7 +333,7 @@ $(document).ready(function(){
         //add_event(data);
     })
 })
-    
+
 </script>
 
 @include('content.footer_container')

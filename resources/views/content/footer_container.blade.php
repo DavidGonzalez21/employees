@@ -3,6 +3,7 @@
  </div><!-- End Main -->
 </div><!-- End Container -->
 </body>
+</html>
 <script>
 $(document).ready(function() {
 		$menuLeft = $('.pushmenu-left');
